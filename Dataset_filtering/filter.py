@@ -1,16 +1,25 @@
+
+import re
 import csv
 
-malayalam_words = []
-with open('../DataSet/word_dict_A.data', 'r', encoding='utf-8') as file:
+# Function to extract text between 1~ and `
+def extract_text(data):
+    return re.findall(r'1~(.*?)`', data)
+
+# Read the .data file and extract text
+input_file_path = "../DataSet/word_dict_B.data"  # Replace with the path to your .data file
+output_file_path = "../DataSet/word_dict_B.csv"  # Replace with the desired path for the CSV output
+
+data_list = []
+with open(input_file_path, 'r', encoding='utf-8') as file:
     for line in file:
-        word = line.strip()
-        malayalam_words.append(word)
+        extracted_texts = extract_text(line)
+        if extracted_texts:
+            data_list.extend([[text] for text in extracted_texts])
 
-csv_file = 'malayalam_words.csv'
-with open(csv_file, 'w', newline='', encoding='utf-8') as csvfile:
-    writer = csv.writer(csvfile)
-    writer.writerow(['Malayalam Word'])  # Write header
-    for word in malayalam_words:
-        writer.writerow([word])
+# Write the extracted text to a CSV file
+with open(output_file_path, 'w', newline='', encoding='utf-8') as csvfile:
+    csv_writer = csv.writer(csvfile)
+    csv_writer.writerows(data_list)
 
-print(f"Malayalam words have been exported to '{csv_file}'.")
+print("Extraction and conversion completed successfully.")

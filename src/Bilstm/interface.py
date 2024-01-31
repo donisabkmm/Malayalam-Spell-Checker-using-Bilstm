@@ -1,3 +1,5 @@
+import csv
+
 import numpy as np
 import torch
 import torch.nn as nn
@@ -5,41 +7,17 @@ import torch.optim as optim
 from torch.utils.data import DataLoader, TensorDataset
 import matplotlib.pyplot as plt
 
-words = ['അംഗസംഖ്യ',
-'അംഗീകരിക്കണം',
-'അംഗീകരിക്കണമെന്നും',
-'അംഗീകരിക്കണമെന്ന്',
-'അംഗീകരിക്കാതെ',
-'അംഗീകരിക്കാനാകില്ല',
-'അംഗീകരിക്കാനാകില്ലെന്നും',
-'അംഗീകരിക്കാനാകില്ലെന്ന്',
-'അംഗീകരിക്കാനാവില്ല',
-'അംഗീകരിക്കാനാവില്ലെന്നു',
-'അംഗീകരിക്കാനാവില്ലെന്നും',
-'അംഗീകരിക്കാനാവില്ലെന്ന്',
-'അംഗീകരിക്കാൻ',
-'അംഗീകരിക്കില്ല',
-'അംഗീകരിക്കില്ലെന്ന'
-,'അംഗീകരിക്കും',
-         'അംഗീകരിച്ചത്',
-         'അംഗീകരിച്ചാണ്',
-         'അംഗീകരിച്ചാൽ',
-         'അംഗീകരിച്ചിട്ടില്ല',
-         'അംഗീകരിച്ചിരുന്നില്ല'
-'അംഗീകാരമാണ്',
-'അംഗീകാരമില്ലാത്ത',
-'അംഗീകാരമുള്ള',
-'അംഗീകാരവും',
-'അംഗീകൃതമോ',
-'അംബാനിയുടെ',
-'അംബാസഡറാണ്',
-'അംബാസഡറിന്റെ',
-'അംബാസഡറുടെ',
-'അംബേദ്കർ',
-'അംബ്രല്ല',
-'അംശമാണ്',
-'അംശവും',
-         ]
+
+filename = open('../../DataSet/Final_dataset.csv','r',encoding='utf-8')
+
+data = csv.reader(filename)
+words = []
+
+
+for i in data:
+    words.extend(i)
+print(words)
+
 char_to_idx = {char: idx + 1 for idx, char in enumerate(sorted(set(''.join(words))))}
 max_len = max(len(word) for word in words)
 X = [[char_to_idx[char] for char in word] for word in words]

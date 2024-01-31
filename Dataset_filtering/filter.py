@@ -8,7 +8,7 @@ def extract_text(data):
 
 # Read the .data file and extract text
 input_file_path = "../DataSet/word_dict_B.data"  # Replace with the path to your .data file
-output_file_path = "../DataSet/word_dict_B.csv"  # Replace with the desired path for the CSV output
+output_file_path = "../DataSet/Final_dataset.csv"  # Replace with the desired path for the CSV output
 
 data_list = []
 with open(input_file_path, 'r', encoding='utf-8') as file:
